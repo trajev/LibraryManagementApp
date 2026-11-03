@@ -30,7 +30,7 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 	
-	@GetMapping("/")
+	@GetMapping()
 	public ResponseEntity<List<Book>> getAllBooks(){
 		return ResponseEntity.ok(bookService.getAllBooks());
 	}
@@ -40,7 +40,7 @@ public class BookController {
 		return ResponseEntity.ok( bookService.getBookById(bookId) );
 	}
 	
-	@PostMapping("/")
+	@PostMapping()
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Book> addBook( @Valid @RequestBody BookDTO book ){
 		return ResponseEntity.status(HttpStatus.CREATED).body( bookService.addBook(book) );

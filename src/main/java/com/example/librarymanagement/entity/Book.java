@@ -25,6 +25,6 @@ public class Book {
 	private String author;
 	private String isbn;
 	private Integer quantity;
-	private Boolean IsAvailable;
+	private Boolean isAvailable;
 	
 }

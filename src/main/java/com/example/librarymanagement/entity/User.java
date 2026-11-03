@@ -1,7 +1,13 @@
 package com.example.librarymanagement.entity;
 
+import java.util.Collection;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -16,7 +22,7 @@ import lombok.Data;
 @Entity
 @Table(name="users")
 @Data
-public class User {
+public class User implements UserDetails {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.UUID)
@@ -27,5 +33,13 @@ public class User {
 	
 	@ElementCollection(fetch=FetchType.EAGER)
 	private Set<String> roles;
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		
+		return roles.stream()
+				.map( SimpleGrantedAuthority::new )
+				.collect( Collectors.toList() );
+	}
 
 }

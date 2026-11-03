@@ -26,6 +26,6 @@ public class BookDTO {
 	private Integer quantity;
 	
 	@NotNull(message = "Book availability status is required")
-	private Boolean IsAvailable;
+	private Boolean isAvailable;
 	
 }
